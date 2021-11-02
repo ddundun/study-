@@ -1,0 +1,527 @@
+<!-- ctrl + h : 바꾸기 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>표준 웹페이지 실습</title>
+    <style>
+        /*웹브라우저별로 존재하는 고유의 여백이나 글자 등을 통일*/
+        * { margin:0; padding:0;}
+        body{font-family: 'Times New Roman', Times, serif;}
+        li{list-style:none;} /*이거하면 ul앞에 .없어짐.!*/
+        a{text-decoration: none;} /*이거 없으면 a태그에 밑줄생김*/
+        img{border:0}
+    </style>
+    <style>
+        body
+        {
+            background-image: url(dadfasdf.jpg);
+            background-size: 100%;
+            background-size: cover;
+            color: white;
+        }
+    </style>
+    <style>
+        #main_header  /*중앙 정렬*/
+        {   width: 960px;margin: 0 auto; 
+            /* 높이도 주고 부모의 position을 static이외의 것을 주면서
+               자손 태그의 absolute를 제대로 적용시키려고 함 */
+            height: 160px;
+            position: relative;
+        }
+        #main_header>#title 
+        {
+            position:absolute;
+            left:20px; top:30px;
+        }
+        #main_header>#main_gnb 
+        {
+            position: absolute;
+            right: 0; top: 0;
+        }
+        #main_header>#main_lnb 
+        {
+            position: absolute;
+            right: 0; bottom: 10px;
+        }
+    </style>
+    <style>
+        #main_gnb>ul {overflow: hidden;}
+        #main_gnb>ul>li {float: left;}
+        #main_gnb>ul>li>a {
+            display: block;
+            padding: 2px 10px;
+            border: 1px solid black;
+        }
+        #main_gnb>ul>li>a:hover { /*커서대면 색변하는거*/
+            background-color: black;
+            color: white;
+        }
+        /*ul태그안에 첫째 li태그의 a!*/
+        #main_gnb>ul>li:first-child>a {border-radius: 10px 0 0 10px;}
+        #main_gnb>ul>li:last-child>a {border-radius: 0 10px 10px 0;}
+
+    </style>
+        <style>
+            .box {float:left; width: 100px; height: 10px; border: 3px solid black; padding: 2px 10px;}
+            #main_lnb>ul {overflow: hidden;}
+            #main_lnb>ul>li {float: left;}
+            #main_lnb>ul>li>a {
+                display: block;
+                padding: 10px 20px; /*여백크기?*/
+                border: 1px solid black;
+            }
+            #main_lnb>ul>li>a:hover { /*커서대면 색변하는거*/
+                background-color: black;
+                color: white;
+            }
+            /*ul태그안에 첫째 li태그의 a!*/
+            #main_lnb>ul>li:first-child>a {border-radius: 10px 0 0 10px;}
+            #main_lnb>ul>li:last-child>a {border-radius: 0 10px 10px 0;}
+    
+        </style>
+        <style>
+            @font-face {
+            font-family: 'SBAggroB';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;}
+            h1{ font-family:'SBAggroB';}
+        </style>
+        <style>
+            @font-face {
+            font-family: 'GmarketSansBold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+            font-weight: normal;
+            font-style: normal; }
+            /* h2 {font-family:'GmarketSansBold' ;} */
+        </style>
+         <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+            h2 {font-family: 'Gugi', cursive;}
+        </style>
+        <style> /* 메인헤더 a태그에만 적용*/
+            #main_header a {font-family: 'NanumHyeJunCe'; font-weight: bold;}
+            #main_footer h3 {font-family: 'NanumHyeJunCe'; font-weight: bold;}
+
+        </style>
+        <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumHyeJunCe.css" rel="stylesheet">
+        <style>
+            #content {
+                width:960px;
+                margin :0 auto;
+                overflow: hidden;
+            }
+            #content>#main_section {
+                width: 750px;
+                float: left;
+            }
+            #content>#main_aside { /*section과 aside사이엔 10 여백존재*/
+                width: 200px;
+                float: right;
+            }
+            #main_section>article.main_article {/**/
+                margin-bottom: 10px;
+                padding: 20px;
+                border: 1px solid black;
+                overflow: hidden;
+            }
+            
+            #main_section>article.main_article>div{/*지워야대*/
+                margin-bottom: 10px;
+                padding: 20px;
+                border: 1px solid black;
+                position: relative; width:200px; height: 100px; border: 1px solid black; ;
+            }
+        
+            /* #main_section>article.main_article>h1 h1에만적용?*/
+            #main_aside label {font-family:'Gmarket Sans TTF'; } 
+            .description>strong, .description>strong+p {font-family:'Gmarket Sans TTF Medium';} 
+            /* #tab_item p {font-family:'GmarketSansBold';} */
+        </style>
+        <style>
+            /*첫번째 탭*/ /*of type쓰면 첫번째꺼찾아감/ input태그중 첫번째꺼 감춤*/
+            input:nth-of-type(1) {display: none;} /*radio감추기 ->감췄기때문에 글자누르는방법뿐*/
+            input:nth-of-type(1) ~ div:nth-of-type(1) {display: none;}  /*그 라디오 옆의 div(tab_item)지우기*/
+            /*input태그들중에 처음오는애(type라디오퍼스트) 옆에 첫째 div감추기?*/
+            input:nth-of-type(1):checked ~ div:nth-of-type(1) {display:block;} /*div(tab_item) 나타나게하기*/
+
+            /*두번째 탭*/
+            input:nth-of-type(2) {display: none;} /*radio 지우는거 */
+            input:nth-of-type(2) ~ div:nth-of-type(2) {display: none;} /*그 라디오 옆의 div(tab_item)지우기*/
+            input:nth-of-type(2):checked ~ div:nth-of-type(2) {display:block;} /*div(tab_item) 나타나게하기*/
+            /* radio1,2 글자 누를때마다 값바뀜. 근데 체크표시는 감춰놓음.!   */
+
+            /*탭모양 구성*/
+            section.buttons{overflow: hidden;} /*class이름 버튼인거 히든*/
+            section.buttons>label /*first와 second*/
+            {
+                /*수평 정렬*/
+                display: block;
+                float: left;
+
+                /*크기 및 글자 위치 지정*/
+                width: 100px;
+
+                /*height=lin-height: 수직방향 중앙 정렬*/
+                height: 30px;
+                line-height: 30px;
+                
+                /*수평 방향 중앙 정렬*/
+                text-align: center;
+
+                /*테두리 지정*/
+                box-sizing: border-box;
+                border: 1px solid black;
+
+                background-color: black;
+                color: white;
+            }
+            /*radio가 체크되었을 때 옆에 있는 label들 중 첫번째 label*/
+            /*First*/
+            input:nth-of-type(1):checked~ section.buttons>label:nth-of-type(1)
+            {
+                background-color: white;
+                color:rgb(0,101,179);
+                border: 3px solid white;
+            }
+
+            /*radio가 체크되었을 때 옆에 있는 label들 중 두번째 label*/
+            /*Second*/
+            /* ~: 옆에있는 것(전부)_들 */
+            input:nth-of-type(2):checked~ section.buttons>label:nth-of-type(2)
+            {
+                background-color: white;
+                color:rgb(0,101,179);
+                border: 3px solid white;
+            }
+        </style>
+        <style>
+            /*class명이 item인 태그*/
+            .item
+            {
+                overflow: hidden;
+                padding: 10px;
+                border: 1px solid black;
+                background-color: white;
+                border-top: none;
+
+            }
+            .thumbnail 
+            {
+                float:left; /*왼쪽 정렬*/
+            }
+            .description 
+            {
+                float:left; /*왼쪽 정렬*/
+                margin-left: 10px;
+            }
+            .description>strong
+            {
+                display: block;
+                width: 120px;
+            }
+            .description>strong+p {width:120px;}
+                            
+            /*글자가 너무 길어졌을 때 생략시키는 방법45*/
+            /*+는 바로 옆에 있는 것(한개) 의미*/
+            .description>strong, .description>strong+p
+            {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+        </style>
+        
+        <style>
+            #main_footer {
+                width: 960px;
+                margin: 0 auto;
+                margin-bottom: 10px;
+                /*이렇게 해야 자연스러운 중앙정렬완성*/
+
+                /*테두리*/
+                box-sizing: border-box;
+                padding : 10px;
+                border: 1px solid black;
+
+                /*글자 정렬*/
+                text-align: center;
+
+            }
+        </style>
+        <style>
+            #main_section>article.main_article>p {font-family:'Gmarket Sans TTF Light';}
+            #main_section>article.main_article>div {font-family:'Gmarket Sans TTF Light';}
+
+        </style>
+</head>
+<body>
+    <header id="main_header">
+        <div id="title">
+            <h1>삼성라이온즈</h1>
+            <h2><i>New Blue! New Lions!</i></h2>
+        </div>
+        <nav id="main_gnb"> 
+            <!-- 우측상단  -->
+            <ul>
+                <!-- (li>a[href=#]{$})*5 -->
+                <li><a href="https://www.instagram.com/samsunglions_baseballclub/?hl=ko"><img width=30 height= 30 src="Instagram_100px.png" alt=""></a></li>
+                <li><a href="https://www.youtube.com/channel/UCMWAku3a3h65QpLm63Jf2pw"><img width=30 height= 30 src="youtube_squared_100px.png" alt=""></a></li>
+                <li><a href="https://www.samsunglions.com/index.asp"><img width=30 height= 30 src="home_48px.png" alt=""></a></li>
+
+                <!-- <li><a href="#">HTML3_gnb</a></li> -->
+                <!-- <li><a href="#">HTML4_gnb</a></li> -->
+                <!-- <li><a href="#">HTML5_gnb</a></li> -->
+            </ul>
+        </nav>
+        <nav id="main_lnb">
+            <ul>
+                <!-- (li>a[href=#]{$})*5 -->
+                <!-- <li><a href="#">HTML1_lnb</a></li>
+                <li><a href="#">HTML2_lnb</a></li>
+                <li><a href="#">HTML3_lnb</a></li>
+                <li><a href="#">HTML4_lnb</a></li>  
+                <li><a href="#">HTML5_lnb</a></li> -->
+            </ul>
+        </nav>
+    </header>
+    <div id="content">
+        <section id= "main_section">
+            <!-- article.main_article*3 -->
+            <article class="main_article">
+                <h1>2021 프로야구 포스트시즌 일정</h1>
+                <hr>
+                <br>
+                <h1>와일드카드: 키움 vs 두산</h1>
+                <p>1차전 11월 1일 잠실</p>
+                <p>2차전 11월 2일 잠실</p>
+                <br>
+                <h1>준플레이오프: 와카전 이긴놈 vs lg</h1>
+                <p>1차전 11월 4일 잠실</p>
+                <p>2차전 11월 5일 미정</p>
+                <p>3차전 11월 7일 잠실</p>
+                <br>
+                <h1>플레이오프: 준플옵 이긴놈 vs 삼성</h1>
+                <p>1차전 11월 9일 대구</p>
+                <p>2차전 11월 10일 미정</p>
+                <p>3차전 11월 12일 대구</p>
+                <br>
+                <h1>☆한국시리즈☆ : 플옵이긴놈 vs kt</h1>
+                <p>1차전 11월 14일 고척</p>
+                <p>2차전 11월 15일 고척</p>
+                <p>3차전 11월 17일 고척</p>
+                <p>4차전 11월 18일 고척</p>
+                <p>5차전 11월 20일 고척</p>
+                <p>6차전 11월 21일 고척</p>
+                <p>7차전 11월 22일 고척</p>
+
+            </article>
+            <article class="main_article">
+                <h1>예매하기</h1>
+                <br>
+                <a href="http://ticket.interpark.com/Contents/promotion/sports?seq=8">
+                <img width=150px height= 150px src="interpark.png" alt="">
+                </a>
+                <!-- <div class="box">lgvs한화</div> -->
+           
+           
+            </article>
+            <article class="main_article">
+                <h1>포스트 시즌 진출 성공..!</h1>
+                <p>이게 어디냐 ㅜ감동..</p>
+            </article>
+        </section>
+        <aside id= "main_aside">
+            <!-- 탭바 만들기 -->
+            <input id="first" type="radio" name= "tab" checked="checked">
+            <input id="second" type="radio" name= "tab" >
+            <section class="buttons">
+                <label for="first">레전드경기</label>
+                <label for="second">팀 순위</label>
+            </section>
+            <div class="tab_item">
+                <ul>
+                    <li class="item">
+                        <a href="https://sports.news.naver.com/kbaseball/vod/index?uCategory=kbaseball&category=kbo&id=871724&redirect=true">
+                            <div class="thumbnail">
+                                <img width=40px height= 40px src="play.png" alt="">
+                            </div>
+                            <div class="description">
+                                <strong>삼성vNC</strong>
+                                <p>2021.10.30</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="https://sports.news.naver.com/kbaseball/vod/index?uCategory=kbaseball&category=kbo&id=868898&redirect=true">
+                            <div class="thumbnail">
+                                <img width=40px height= 40px src="play.png" alt="">
+                            </div>
+                            <div class="description">
+                                <strong>삼성vsSSG</strong>
+                                <p>2021.10.24</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="https://sports.news.naver.com/kbaseball/vod/index?uCategory=kbaseball&category=kbo&id=867981&redirect=true">
+                            <div class="thumbnail">
+                                <img width=40px height= 40px src="play.png" alt="">
+                            </div>
+                            <div class="description">
+                                <strong>삼성vsKT</strong>
+                                <p>2021.10.22</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="https://sports.news.naver.com/kbaseball/vod/index?uCategory=kbaseball&category=kbo&id=861101&redirect=true">
+                            <div class="thumbnail">
+                                <img width=40px height= 40px src="play.png" alt="">
+                            </div>
+                            <div class="description">
+                                <strong>삼성vs두산</strong>
+                                <p>2021.10.3</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="https://sports.news.naver.com/kbaseball/vod/index?uCategory=kbaseball&category=kbo&id=854593&redirect=true">
+                            <div class="thumbnail">
+                                <img width=40px height= 40px src="play.png" alt="">
+                            </div>
+                            <div class="description">
+                                <strong>삼성vsSSG</strong>
+                                <p>2021.09.18</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="tab_item">
+                <ul>
+                    <li class="item">
+                        <a href="https://www.ktwiz.co.kr/">
+                            <div class="thumbnail">
+                                <img width=45px height= 45px src="kt.png" alt="">                            
+                            </div>
+                            <div class="description">
+                                <strong>1위</strong>
+                                <p>KT WIZ</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="https://www.samsunglions.com/index.asp">
+                            <div class="thumbnail">
+                                <img width=45px height= 45px src="sam.png" alt="">                            
+                            </div>
+                            <div class="description">
+                                <strong>2위</strong>
+                                <p>삼성 라이온즈</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="https://www.lgtwins.com/service/html.ncd?view=/pc_twins/twins_main/twins_main">
+                            <div class="thumbnail">
+                                <img width=45px height= 45px src="lg.png" alt="">                           
+                            </div>
+                            <div class="description">
+                                <strong>3위</strong>
+                                <p>LG TWINS</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="https://www.doosanbears.com/">
+                            <div class="thumbnail">
+                                <img width=45px height= 45px src="do.png" alt="">
+                            </div>
+                            <div class="description">
+                                <strong>4위</strong>
+                                <p>두산 베어스</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="https://www.heroesbaseball.co.kr/index.do">
+                            <div class="thumbnail">
+                                <img width=45px height= 45px src="kium.png" alt="">
+                            </div>
+                            <div class="description">
+                                <strong>5위</strong>
+                                <p>키움 히어로즈</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="http://www.ssglanders.com/main">
+                            <div class="thumbnail">
+                                <img width=45px height= 45px src="ssg.png" alt="">
+                            </div>
+                            <div class="description">
+                                <strong>6위</strong>
+                                <p>SSG 랜더스</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="https://www.ncdinos.com/homepage.do">
+                            <div class="thumbnail">
+                                <img width=45px height= 45px src="nc.png" alt="">
+                            </div>
+                            <div class="description">
+                                <strong>7위</strong>
+                                <p>NC 다이노스</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="http://www.giantsclub.com/html/">
+                            <div class="thumbnail">
+                                <img width=45px height= 45px src="lotte.png" alt="">
+                            </div>
+                            <div class="description">
+                                <strong>8위</strong>
+                                <p>롯데 자이언츠</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="https://tigers.co.kr/">
+                            <div class="thumbnail">
+                                <img width=45px height= 45px src="HT.png" alt="">
+                            </div>
+                            <div class="description">
+                                <strong>9위</strong>
+                                <p>기아 타이거즈</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="https://www.hanwhaeagles.co.kr/index.do">
+                            <div class="thumbnail">
+                                <img width=45px height= 45px src="han.png" alt="">
+                            </div>
+                            <div class="description">
+                                <strong>10위</strong>
+                                <p>한화 이글스</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+    <footer id="main_footer">
+        <h3>한국시리즈 우승 가즈악..! </h3>
+    </footer>
+</body>
+</html>
